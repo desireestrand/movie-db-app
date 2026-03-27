@@ -37,9 +37,9 @@ app.get("/api/directors/:id", (req, res) => {
     return res.status(404).json({
       error: "Director not found",
     });
-
-    res.json(director);
   }
+
+  res.json(director);
 });
 
 // Lägger till ett nytt objekt i arrayen
