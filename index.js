@@ -42,3 +42,17 @@ app.get("/api/directors/:id", (req, res) => {
   }
 });
 
+app.post("/api/directors", (req, res) => {
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ error: "name is required" });
+  }
+
+  const lastId = directors.length > 0 ? directors[directors.length - 1].id : 0;
+  const newDirector = { id: lastId + 1, name };
+
+  directors.push(newDirector);
+
+  res.status(201).json(newDirector);
+});
