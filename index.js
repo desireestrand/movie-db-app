@@ -79,6 +79,20 @@ app.put("/api/directors/:id", (req, res) => {
   res.json(director);
 });
 
+app.delete("/api/directors/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const index = directors.findIndex((d) => d.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({
+      error: "Director not found",
+    });
+  }
+
+  directors.splice(index, 1);
+  res.status(204).send();
+});
+
 // Startar servern
 const PORT = process.env.PORT || 3000;
 
