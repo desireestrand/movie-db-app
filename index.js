@@ -42,6 +42,7 @@ app.get("/api/directors/:id", (req, res) => {
   }
 });
 
+// Lägger till ett nytt objekt i arrayen
 app.post("/api/directors", (req, res) => {
   const { name } = req.body;
 
@@ -55,4 +56,11 @@ app.post("/api/directors", (req, res) => {
   directors.push(newDirector);
 
   res.status(201).json(newDirector);
+});
+
+// Startar servern
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
