@@ -58,6 +58,27 @@ app.post("/api/directors", (req, res) => {
   res.status(201).json(newDirector);
 });
 
+// Uppdaterar en director
+app.put("/api/directors/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const director = directors.find((d) => d.id === id);
+
+  if (!director) {
+    return res.status(404).json({
+      error: "Director not found",
+    });
+  }
+
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ error: "name is required" });
+  }
+
+  director.name = name;
+  res.json(director);
+});
+
 // Startar servern
 const PORT = process.env.PORT || 3000;
 
